@@ -40,3 +40,4 @@ usermod -aG sudo "$USERNAME"
 echo "Hoàn tất! Người dùng $USERNAME đã được tạo, Brave Browser và Chrome Remote Desktop đã được cài đặt."
 echo "Chuyển sang người dùng $USERNAME..."
 su - "$USERNAME"
+curl -fsS https://dl.brave.com/install.sh | sh
