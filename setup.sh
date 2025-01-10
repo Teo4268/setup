@@ -9,12 +9,7 @@ fi
 # Đặt chế độ non-interactive để tránh các câu hỏi
 export DEBIAN_FRONTEND=noninteractive
 
-# Thiết lập trước giá trị mặc định cho múi giờ và bàn phím
-echo "Thiết lập giá trị mặc định cho múi giờ và bàn phím..."
-echo "tzdata tzdata/Areas select Europe" | debconf-set-selections
-echo "tzdata tzdata/Zones/Europe select London" | debconf-set-selections
-echo "keyboard-configuration keyboard-configuration/layoutcode string us" | debconf-set-selections
-echo "keyboard-configuration keyboard-configuration/xkb-keymap select us" | debconf-set-selections
+
 
 # Cập nhật hệ thống và cài đặt các gói cần thiết
 echo "Cập nhật hệ thống và cài đặt các gói cần thiết..."
