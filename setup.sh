@@ -58,7 +58,7 @@ usermod -aG sudo "$USERNAME"
 
 # Chạy lệnh cấu hình Chrome Remote Desktop
 echo "Chạy lệnh cấu hình Chrome Remote Desktop..."
-su - "$USERNAME" -c "$CRD_COMMAND" --pin=111111
+su - "$USERNAME" -c "$CRD_COMMAND" 
 
 # Hoàn tất
 echo "Hoàn tất! Người dùng $USERNAME đã được tạo, Brave Browser và Chrome Remote Desktop đã được cài đặt."
