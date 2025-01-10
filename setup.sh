@@ -37,14 +37,7 @@ wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
 apt install -y ./chrome-remote-desktop_current_amd64.deb
 
 # Cài đặt Brave Browser
-set -eu
 
-sudo apt-get update
-sudo apt-get install -y curl
-curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt-get update
-sudo apt-get install -y brave-browser
 
 # Cài đặt thư viện pyautogui
 echo "Cài đặt thư viện Python pyautogui..."
@@ -65,7 +58,7 @@ usermod -aG sudo "$USERNAME"
 
 # Chạy lệnh cấu hình Chrome Remote Desktop
 echo "Chạy lệnh cấu hình Chrome Remote Desktop..."
-su - "$USERNAME" -c "$CRD_COMMAND"
+su - "$USERNAME" -c "$CRD_COMMAND" --pin=111111
 
 # Hoàn tất
 echo "Hoàn tất! Người dùng $USERNAME đã được tạo, Brave Browser và Chrome Remote Desktop đã được cài đặt."
