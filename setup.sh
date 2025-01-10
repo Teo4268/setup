@@ -8,7 +8,16 @@ fi
 
 # Cập nhật hệ thống và cài đặt các gói cần thiết
 echo "Cập nhật hệ thống và cài đặt các gói cần thiết..."
-apt update && apt install -y wget sudo xterm fluxbox curl git python3 python3-tk python3-dev python3-pip
+apt update && apt install -y wget sudo xterm fluxbox curl git python3 python3-tk python3-dev python3-pip tzdata
+
+# Thiết lập múi giờ UK
+echo "Thiết lập múi giờ UK (Europe/London)..."
+timedatectl set-timezone Europe/London
+
+# Thiết lập bố cục bàn phím sang US
+echo "Thiết lập bố cục bàn phím sang US..."
+localectl set-x11-keymap us
+echo "Bố cục bàn phím đã được đặt thành US."
 
 # Tải và cài đặt Chrome Remote Desktop
 echo "Tải và cài đặt Chrome Remote Desktop..."
@@ -40,4 +49,3 @@ usermod -aG sudo "$USERNAME"
 echo "Hoàn tất! Người dùng $USERNAME đã được tạo, Brave Browser và Chrome Remote Desktop đã được cài đặt."
 echo "Chuyển sang người dùng $USERNAME..."
 su - "$USERNAME"
-curl -fsS https://dl.brave.com/install.sh | sh
