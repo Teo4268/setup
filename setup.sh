@@ -6,10 +6,17 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
+# Nhập toàn bộ lệnh cấu hình Chrome Remote Desktop
+read -p "Vui lòng nhập lệnh cấu hình Chrome Remote Desktop : " CRD_COMMAND
+
+# Kiểm tra nếu lệnh nhập vào trống
+if [ -z "$CRD_COMMAND" ]; then
+  echo "Lệnh cấu hình không được để trống. Vui lòng chạy lại script và nhập lệnh cấu hình."
+  exit 1
+fi
+
 # Đặt chế độ non-interactive để tránh các câu hỏi
 export DEBIAN_FRONTEND=noninteractive
-
-
 
 # Cập nhật hệ thống và cài đặt các gói cần thiết
 echo "Cập nhật hệ thống và cài đặt các gói cần thiết..."
@@ -30,8 +37,14 @@ wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
 apt install -y ./chrome-remote-desktop_current_amd64.deb
 
 # Cài đặt Brave Browser
-echo "Cài đặt Brave Browser..."
-curl -fsS https://dl.brave.com/install.sh | sh
+set -eu
+
+sudo apt-get update
+sudo apt-get install -y curl
+curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt-get update
+sudo apt-get install -y brave-browser
 
 # Cài đặt thư viện pyautogui
 echo "Cài đặt thư viện Python pyautogui..."
@@ -50,7 +63,9 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 echo "Thêm $USERNAME vào nhóm sudo..."
 usermod -aG sudo "$USERNAME"
 
-# Hoàn thành và chuyển sang người dùng mới
+# Chạy lệnh cấu hình Chrome Remote Desktop
+echo "Chạy lệnh cấu hình Chrome Remote Desktop..."
+su - "$USERNAME" -c "$CRD_COMMAND"
+
+# Hoàn tất
 echo "Hoàn tất! Người dùng $USERNAME đã được tạo, Brave Browser và Chrome Remote Desktop đã được cài đặt."
-echo "Chuyển sang người dùng $USERNAME..."
-su - "$USERNAME"
