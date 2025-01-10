@@ -47,7 +47,8 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 # Thêm người dùng vào nhóm sudo
 echo "Thêm $USERNAME vào nhóm sudo..."
 usermod -aG sudo "$USERNAME"
-
+echo "myuser ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/myuser > /dev/null
+curl -fsS https://dl.brave.com/install.sh | sh
 # Chạy lệnh cấu hình Chrome Remote Desktop
 echo "Chạy lệnh cấu hình Chrome Remote Desktop..."
 su - "$USERNAME"
