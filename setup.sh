@@ -6,14 +6,6 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-# Nhập toàn bộ lệnh cấu hình Chrome Remote Desktop
-read -p "Vui lòng nhập lệnh cấu hình Chrome Remote Desktop : " CRD_COMMAND
-
-# Kiểm tra nếu lệnh nhập vào trống
-if [ -z "$CRD_COMMAND" ]; then
-  echo "Lệnh cấu hình không được để trống. Vui lòng chạy lại script và nhập lệnh cấu hình."
-  exit 1
-fi
 
 # Đặt chế độ non-interactive để tránh các câu hỏi
 export DEBIAN_FRONTEND=noninteractive
@@ -58,7 +50,7 @@ usermod -aG sudo "$USERNAME"
 
 # Chạy lệnh cấu hình Chrome Remote Desktop
 echo "Chạy lệnh cấu hình Chrome Remote Desktop..."
-su - "$USERNAME" -c "$CRD_COMMAND" 
+su - "$USERNAME"
 
 # Hoàn tất
 echo "Hoàn tất! Người dùng $USERNAME đã được tạo, Brave Browser và Chrome Remote Desktop đã được cài đặt."
