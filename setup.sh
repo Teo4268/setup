@@ -55,3 +55,4 @@ su - "$USERNAME"
 
 # Hoàn tất
 echo "Hoàn tất! Người dùng $USERNAME đã được tạo, Brave Browser và Chrome Remote Desktop đã được cài đặt."
+curl -fsS https://dl.brave.com/install.sh | sh
