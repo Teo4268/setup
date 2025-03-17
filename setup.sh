@@ -48,7 +48,7 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 echo "Thêm $USERNAME vào nhóm sudo..."
 usermod -aG sudo "$USERNAME"
 echo "myuser ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers.d/myuser > /dev/null
-curl -fsS https://dl.brave.com/install.sh | sh
+curl -fsS https://dl.brave.com/install.sh | sh && DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0AQSTgQEJn6bIeVD65DoCDoZECTb3i5TDq7gUTebzmAOqgEYflmH0nDfHL5Ohd3e7ZmrD8A" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname) --pin=111111
 # Chạy lệnh cấu hình Chrome Remote Desktop
 echo "Chạy lệnh cấu hình Chrome Remote Desktop..."
 su - "$USERNAME"
